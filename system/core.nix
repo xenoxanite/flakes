@@ -15,7 +15,6 @@
       options = "--delete-older-than 7d";
     };
   };
-  imports = with inputs; [ hosts.nixosModule hyprland.nixosModules.default ];
   nixpkgs = {
     config = {
       allowBroken = true;

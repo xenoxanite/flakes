@@ -27,8 +27,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hardened-firefox = {
-      url = "github:arkenfox/user.js";
+    BetterFox = {
+      url = "github:yokoffing/BetterFox";
       flake = false;
     };
 

@@ -32,8 +32,9 @@
           directory = ".ssh";
           mode = "0700";
         }
+        ".cache"
+        ".mozilla/"
         ".local"
-        ".librewolf"
         ".config"
       ];
       files = [ ".npmrc" ];

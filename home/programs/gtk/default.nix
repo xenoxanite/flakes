@@ -1,21 +1,23 @@
 { pkgs, ... }: {
   home.sessionVariables = {
     GTK_THEME = "Nordic";
-    QT_QPA_PLATFORMTHEME = "gtk3";
   };
   home.pointerCursor = {
-    package = pkgs.catppuccin-cursors;
-    name = "Catppuccin-Frappe-Dark";
+    name = "Catppuccin-Mocha-Green-Cursors";
+    package = pkgs.catppuccin-cursors.mochaGreen;
     size = 16;
+    gtk.enable = true;
   };
-  home.pointerCursor.gtk.enable = true;
   gtk = {
     enable = true;
     theme = {
       name = "Nordic";
       package = pkgs.nordic;
     };
-    cursorTheme = { name = "Catppuccin-Frappe-Dark"; };
+    cursorTheme = {
+      name = "Catppuccin-Mocha-Green-Cursors";
+      package = pkgs.catppuccin-cursors.mochaGreen;
+    };
     iconTheme = {
       name = "Papirus-Dark";
       package = pkgs.papirus-icon-theme;
@@ -29,6 +31,7 @@
       gtk-xft-hinting = 1;
       gtk-xft-hintstyle = "hintslight";
       gtk-xft-rgba = "rgb";
+      gtk-cursor-theme-name = "Catppuccin-Mocha-Green-Cursors";
     };
     gtk2.extraConfig = ''
       gtk-xft-antialias=1
@@ -36,5 +39,17 @@
       gtk-xft-hintstyle="hintslight"
       gtk-xft-rgba="rgb"
     '';
+    gtk4.extraConfig = {
+      gtk-xft-antialias = 1;
+      gtk-xft-hinting = 1;
+      gtk-xft-hintstyle = "hintslight";
+      gtk-xft-rgba = "rgb";
+      gtk-cursor-theme-name = "Catppuccin-Mocha-Green-Cursors";
+    };
+  };
+
+  qt = {
+    enable = true;
+    platformTheme = "gtk";
   };
 }

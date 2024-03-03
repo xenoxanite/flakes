@@ -1,1 +1,4 @@
-{ imports = [ ./foot ./fish ./git ./gtk ./waybar ./mako ./rofi ]; }
+{
+  imports =
+    [ ./foot ./fish ./git ./gtk ./waybar ./mako ./rofi ./firefox ./discord ];
+}

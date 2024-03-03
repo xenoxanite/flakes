@@ -8,7 +8,7 @@
     style = ''
       * {
         font-family: "JetBrainsMono Nerd Font";
-        font-size: 12pt;
+        font-size: 14pt;
         font-weight: bold;
         border-radius: 0px;
         transition-property: background-color;
@@ -97,9 +97,10 @@
         padding-left: 10px;
       }
       #window {
+        opacity: 0.7;
         color: #414868;
         font-style: italic;
-        font-size: 10pt;
+        font-size: 11pt;
       }
     '';
     settings = [{

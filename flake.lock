@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "BetterFox": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1708362382,
+        "narHash": "sha256-ciNP1TLpxs/W08UhJg38tjPxtzhnRcjMyh+BwUsN2wA=",
+        "owner": "yokoffing",
+        "repo": "BetterFox",
+        "rev": "14de7b101d48f15f50df7dd5dbfffefca5b4a855",
+        "type": "github"
+      },
+      "original": {
+        "owner": "yokoffing",
+        "repo": "BetterFox",
+        "type": "github"
+      }
+    },
     "disko": {
       "inputs": {
         "nixpkgs": [
@@ -93,22 +109,6 @@
       "original": {
         "owner": "numtide",
         "repo": "flake-utils",
-        "type": "github"
-      }
-    },
-    "hardened-firefox": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1707077370,
-        "narHash": "sha256-624Giuo1TfeXQGzcGK9ETW86esNFhFZ5a46DCjT6K5I=",
-        "owner": "arkenfox",
-        "repo": "user.js",
-        "rev": "33a84b608c8a1f871c6ce9c4d2b932dc57078fae",
-        "type": "github"
-      },
-      "original": {
-        "owner": "arkenfox",
-        "repo": "user.js",
         "type": "github"
       }
     },
@@ -355,8 +355,8 @@
     },
     "root": {
       "inputs": {
+        "BetterFox": "BetterFox",
         "disko": "disko",
-        "hardened-firefox": "hardened-firefox",
         "home-manager": "home-manager",
         "hosts": "hosts",
         "hyprland": "hyprland",

@@ -44,14 +44,13 @@
     umount /btrfs_tmp
   '';
 
-  networking.hostName = "oxygen";
   time.timeZone = "Asia/Dhaka";
 
   users.users."xenoxanite" = {
     isNormalUser = true;
     initialPassword = "rainy";
     extraGroups = [ "wheel" ];
-    packages = with pkgs; [ librewolf fd fzf gh eza nixfmt ];
+    packages = with pkgs; [ firefox fd fzf eza ];
   };
 
   programs = {

@@ -213,20 +213,20 @@ in {
       bind=$mainMod,X,exec, bash ~/.config/rofi/powermenu.sh
 
       # volume control
-      ",XF86AudioRaiseVolume,exec, pamixer -i 5"
-      ",XF86AudioLowerVolume,exec, pamixer -d 5"
-      ",XF86AudioMute,exec, pamixer -t"
+      bind=,XF86AudioRaiseVolume,exec, pamixer -i 5
+      bind=,XF86AudioLowerVolume,exec, pamixer -d 5
+      bind=,XF86AudioMute,exec, pamixer -t
 
       # music control bindings
-      ",XF86AudioPlay,exec, playerctl play-pause"
-      ",XF86AudioNext,exec, playerctl next"
-      ",XF86AudioPrev,exec, playerctl previous"
-      ", XF86AudioStop, exec, playerctl stop"
+      bind=,XF86AudioPlay,exec, playerctl play-pause
+      bind=,XF86AudioNext,exec, playerctl next
+      bind=,XF86AudioPrev,exec, playerctl previous
+      bind=, XF86AudioStop, exec, playerctl stop
 
       #---------------#
       # waybar toggle #
       # --------------#
-      bind=$mainMod,B,exec,killall -SIGUSR1 .waybar-wrapped
+      bind=$mainMod,B,exec, pkill -SIGUSR1 waybar
 
       #---------------#
       # resize window #
