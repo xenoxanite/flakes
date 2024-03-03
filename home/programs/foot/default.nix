@@ -3,8 +3,8 @@
     enable = true;
     settings = {
       main = {
-        font = "JetbrainsMono Nerd Font:size=16";
-        pad = "3x3";
+        font = "JetbrainsMono Nerd Font:size=18";
+        pad = "4x4";
       };
       cursor = {
         style = "block";

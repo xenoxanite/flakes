@@ -5,7 +5,7 @@
     useGlobalPkgs = true;
     extraSpecialArgs = { inherit inputs user; };
     users.${user} = {
-      imports = [ ./wm/hyprland ./programs ./impermanence.nix ./editor/neovim ];
+      imports = [ ./wm/hyprland ./programs ./editor/neovim ];
       home = {
         username = "${user}";
         homeDirectory = "/home/${user}";
