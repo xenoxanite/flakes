@@ -4,29 +4,15 @@
   environment = {
     systemPackages = with pkgs; [
       libnotify
-      wl-clipboard
-      wlr-randr
       wayland
-      wayland-scanner
-      wayland-utils
-      egl-wayland
-      wayland-protocols
-      pkgs.xorg.xeyes
-      glfw-wayland
-      xwayland
       pkgs.qt6.qtwayland
       cinnamon.nemo
-      polkit_gnome
       wf-recorder
-      alsa-lib
-      alsa-utils
-      flac
+      xdg-utils
+      pamixer
+      playerctl
       pulsemixer
-      linux-firmware
-      lxappearance
       imagemagick
-      grim
-      slurp
     ];
     variables.NIXOS_OZONE_WL = "1";
   };

@@ -90,9 +90,8 @@ in {
           blur {
               enabled = true
               size = 3
-              passes = 1
+              passes = 3
               new_optimizations = true
-              xray = true
               ignore_opacity = false
           }
       }
@@ -213,16 +212,16 @@ in {
       bind=$mainMod,z,exec, pkill rofi || rofi -show drun -theme ~/.config/rofi/launcher 
       bind=$mainMod,X,exec, bash ~/.config/rofi/powermenu.sh
 
-      #-----------------------------------------#
-      # control volume,media players-#
-      #-----------------------------------------#
-      bind=,XF86AudioRaiseVolume,exec, pamixer -i 5
-      bind=,XF86AudioLowerVolume,exec, pamixer -d 5
-      bind=,XF86AudioMute,exec, pamixer -t
+      # volume control
+      ",XF86AudioRaiseVolume,exec, pamixer -i 5"
+      ",XF86AudioLowerVolume,exec, pamixer -d 5"
+      ",XF86AudioMute,exec, pamixer -t"
 
-      bind=,XF86AudioPlay,exec, mpc -q toggle 
-      bind=,XF86AudioNext,exec, mpc -q next 
-      bind=,XF86AudioPrev,exec, mpc -q prev
+      # music control bindings
+      ",XF86AudioPlay,exec, playerctl play-pause"
+      ",XF86AudioNext,exec, playerctl next"
+      ",XF86AudioPrev,exec, playerctl previous"
+      ", XF86AudioStop, exec, playerctl stop"
 
       #---------------#
       # waybar toggle #

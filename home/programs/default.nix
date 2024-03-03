@@ -1,1 +1,1 @@
-{ imports = [ ./foot ./fish ./git ./gtk ./waybar ./mako ]; }
+{ imports = [ ./foot ./fish ./git ./gtk ./waybar ./mako ./rofi ]; }

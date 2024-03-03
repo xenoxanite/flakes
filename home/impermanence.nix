@@ -13,11 +13,11 @@
       "vids"
       ".librewolf"
       ".config/gh"
-      ".config/nvim"
-      ".local/share/direnv"
+      ".local/share"
+      ".local/state"
+      ".cache"
       ".gnupg"
       ".ssh"
-      ".local/share/nvim"
     ];
     files = [ ".screenrc" ];
     allowOther = true;

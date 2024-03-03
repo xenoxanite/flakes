@@ -145,7 +145,7 @@
       };
       "network" = {
         "format-disconnected" = "󰯡 Disconnected";
-        "format-ethernet" = "󰀂 {ifname} ({ipaddr})";
+        "format-ethernet" = "󰀂 {ifname}";
         "format-linked" = "󰖪 {essid} (No IP)";
         "format-wifi" = "󰖩 {essid}";
         "interval" = 1;
