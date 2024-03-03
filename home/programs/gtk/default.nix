@@ -1,12 +1,9 @@
 { pkgs, ... }: {
-  home.sessionVariables = {
-    GTK_THEME = "Nordic";
-  };
+  home.sessionVariables = { GTK_THEME = "Nordic"; };
   home.pointerCursor = {
-    name = "Catppuccin-Mocha-Green-Cursors";
-    package = pkgs.catppuccin-cursors.mochaGreen;
+    name = "Catppuccin-Mocha-Dark-Cursors";
+    package = pkgs.catppuccin-cursors.mochaDark;
     size = 16;
-    gtk.enable = true;
   };
   gtk = {
     enable = true;
@@ -15,8 +12,8 @@
       package = pkgs.nordic;
     };
     cursorTheme = {
-      name = "Catppuccin-Mocha-Green-Cursors";
-      package = pkgs.catppuccin-cursors.mochaGreen;
+      name = "Catppuccin-Mocha-Dark-Cursors";
+      package = pkgs.catppuccin-cursors.mochaDark;
     };
     iconTheme = {
       name = "Papirus-Dark";
@@ -24,7 +21,7 @@
     };
     font = {
       name = "JetBrainsMono Nerd Font";
-      size = 12;
+      size = 11;
     };
     gtk3.extraConfig = {
       gtk-xft-antialias = 1;

@@ -17,7 +17,6 @@
       imv 
       mpv
       bat
-      btop
     ];
     variables.NIXOS_OZONE_WL = "1";
   };
