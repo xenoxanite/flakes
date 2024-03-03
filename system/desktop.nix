@@ -13,6 +13,9 @@
       playerctl
       pulsemixer
       imagemagick
+      imv 
+      mpv
+      bat
     ];
     variables.NIXOS_OZONE_WL = "1";
   };
