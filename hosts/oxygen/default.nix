@@ -5,10 +5,14 @@
 { config, inputs, lib, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    inputs.home-manager.nixosModules.default
+    inputs.disko.nixosModules.default
+    ./../../system
+    ./../../home
+    (import ./../../lib/disko.nix { device = "/dev/nvme0n1"; })
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -40,64 +44,27 @@
     umount /btrfs_tmp
   '';
 
-
-  networking.hostName = "oxygen"; 
+  networking.hostName = "oxygen";
   time.timeZone = "Asia/Dhaka";
 
   users.users."xenoxanite" = {
     isNormalUser = true;
     initialPassword = "rainy";
-    extraGroups = [ "wheel" ];  
-    packages = with pkgs; [
-      firefox
-      gh
-      foot
-      kitty
-    ];
+    extraGroups = [ "wheel" ];
+    packages = with pkgs; [ librewolf fd fzf gh eza nixfmt ];
   };
 
   programs = {
-  	git.enable = true;
-    waybar.enable = true;
-    neovim.enable = true;
     hyprland.enable = true;
     nano.enable = false;
   };
 
+  programs.fish.enable = true;
+  users.defaultUserShell = pkgs.fish;
+  environment.shells = with pkgs; [ fish ];
 
-
-  sound.enable = true;
-  hardware.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
-
-
-users.defaultUserShell = pkgs.zsh;
-environment.shells = with pkgs; [ zsh ];
-programs.zsh = {
-	enable = true;
-	enableCompletion = true;
-	autosuggestions.enable = true;
-	syntaxHighlighting.enable = true;
-	loginShellInit = ''
-        	if [[ "$(tty)" == "/dev/tty1" ]] then
-        		Hyprland 
-	        fi
-      ''; 
-};
-
-
-fonts.packages = with pkgs; [
- (nerdfonts.override {
-        fonts = [ "JetBrainsMono" "Hack" ];
-      })
-];
-
+  fonts.packages = with pkgs;
+    [ (nerdfonts.override { fonts = [ "JetBrainsMono" "Hack" ]; }) ];
 
   powerManagement = {
     enable = true;
@@ -109,38 +76,9 @@ fonts.packages = with pkgs; [
   '';
   services.getty.autologinUser = "xenoxanite";
 
-
   system.stateVersion = "23.11"; # Did you read the comment?
 
-
-
-  fileSystems."/persist".neededForBoot = true;
-  environment.persistence."/persist/system" = {
-    hideMounts = true;
-    directories = [
-      "/etc/nixos"
-      "/var/log"
-      "/var/lib/nixos"
-      "/var/lib/systemd/coredump"
-      "/etc/NetworkManager/system-connections"
-      { directory = "/var/lib/colord"; user = "colord"; group = "colord"; mode = "u=rwx,g=rx,o="; }
-    ];
-    files = [
-      "/etc/machine-id"
-      { file = "/var/keys/secret_file"; parentDirectory = { mode = "u=rwx,g=,o="; }; }
-    ];
-  };
-
-  nix.settings.trusted-users = ["xenoxanite" "root"];
+  nix.settings.trusted-users = [ "xenoxanite" "root" ];
   programs.fuse.userAllowOther = true;
-systemd.tmpfiles.rules = [
-	"/persist 1777 root xenoxanite"
-];
-  home-manager = {
-    extraSpecialArgs = {inherit inputs;};
-    users = {
-      "xenoxanite" = import ./home.nix;
-    };
-  };
+  systemd.tmpfiles.rules = [ "/persist 1777 root xenoxanite" ];
 }
-

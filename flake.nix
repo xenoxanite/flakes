@@ -17,18 +17,45 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nur = {
+      url = "github:nix-community/NUR";
+    };
+
+    neovim-nightly-overlay = {
+      url = "github:nix-community/neovim-nightly-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    hardened-firefox = {
+      url = "github:arkenfox/user.js";
+      flake = false;
+    };
+
+    hyprland = {
+      url = "github:hyprwm/Hyprland";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    hosts.url = "github:StevenBlack/hosts";
+
   };
 
-  outputs = {nixpkgs, ...} @ inputs:
+  outputs = {nixpkgs, self, ...} @ inputs:
+
+ let
+      selfPkgs = import ./pkgs;
+      system = "x86_64-linux";
+      user = "xenoxanite";
+      inherit (nixpkgs) lib;
+    in 
   {
+packages = nixpkgs.legacyPackages.${system};
+      overlays.default = selfPkgs.overlay;
     nixosConfigurations.oxygen = nixpkgs.lib.nixosSystem {
-      specialArgs = {inherit inputs;};
+      specialArgs = {inherit inputs self user;};
       modules = [
-        inputs.disko.nixosModules.default
-        (import ./disko.nix { device = "/dev/nvme0n1"; })
-        ./configuration.nix
-        inputs.home-manager.nixosModules.default
-        inputs.impermanence.nixosModules.impermanence
+        ./hosts/oxygen
       ];
     };
   };

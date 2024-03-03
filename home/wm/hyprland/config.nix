@@ -1,124 +1,64 @@
-{ pkgs, inputs, ... }:
-
-{ 
-  imports = [
-    inputs.impermanence.nixosModules.home-manager.impermanence
-  ];
-
-
-  home.persistence."/persist/home" = {
-    directories = [
-      "pix"
-      "docs"
-      "dev"
-      "vids"
-      ".mozilla"
-      ".config/git"
-      ".config/gh"
-      ".config/nvim"
-      ".local/share/direnv"
-  ".gnupg" 
-   ".ssh" 
-        ".local/share/nvim"
-    ];
-    files = [
-      ".screenrc"
-    ];
-    allowOther = true;
+{ pkgs, ... }:
+let
+  myswaylock = pkgs.writeShellScriptBin "myswaylock" ''
+    ${pkgs.swaylock-effects}/bin/swaylock  \
+           --screenshots \
+           --clock \
+           --indicator \
+           --indicator-radius 100 \
+           --indicator-thickness 7 \
+           --effect-blur 7x5 \
+           --effect-vignette 0.5:0.5 \
+           --ring-color 3b4252 \
+           --key-hl-color 880033 \
+           --line-color 00000000 \
+           --inside-color 00000088 \
+           --separator-color 00000000 \
+           --grace 2 \
+           --fade-in 0.3
+  '';
+  launch_waybar = pkgs.writeShellScriptBin "launch_waybar" ''
+    killall .waybar-wrapped
+    ${pkgs.waybar}/bin/waybar > /dev/null 2>&1 &
+  '';
+  suspendScript = pkgs.writeShellScript "suspend-script" ''
+    RUNNING_COUNT=$(${pkgs.pipewire}/bin/pw-cli i all | ${pkgs.ripgrep}/bin/rg "state: \"running\"" -c || true)
+    if [ -z "$RUNNING_COUNT" ]; then
+      RUNNING_COUNT=0
+    fi
+    if [ $RUNNING_COUNT -le 2 ]; then
+      ${pkgs.systemd}/bin/systemctl suspend
+    fi
+  '';
+in {
+  services.swayidle = {
+    enable = true;
+    events = [{
+      event = "before-sleep";
+      command = "${myswaylock}/bin/myswaylock";
+    }];
+    timeouts = [{
+      timeout = 300;
+      command = suspendScript.outPath;
+    }];
   };
-
-  home.stateVersion = "23.11"; 
-
-  programs = {
-    kitty = {
-      enable = true;
-      environment = { };
-      keybindings = { };
-      font.name = "jetbrains mono nerd font";
-      font.size = 15;
-      settings = {
-        italic_font = "auto";
-        bold_italic_font = "auto";
-        mouse_hide_wait = 2;
-        cursor_shape = "block";
-        url_color = "#0087bd";
-        url_style = "dotted";
-        #Close the terminal =  without confirmation;
-        confirm_os_window_close = 0;
-        background_opacity = "0.95";
-      };
-      extraConfig = ''
-        foreground            #D8DEE9
-        background            #434c5e
-        selection_foreground  #000000
-        selection_background  #FFFACD
-        url_color             #0087BD
-        cursor                #81A1C1
-
-        # black
-        color0   #3B4252
-        color8   #4C566A
-
-        # red
-        color1   #BF616A
-        color9   #BF616A
-
-        # green
-        color2   #A3BE8C
-        color10  #A3BE8C
-
-        # yellow
-        color3   #EBCB8B
-        color11  #EBCB8B
-
-        # blue
-        color4  #81A1C1
-        color12 #81A1C1
-
-        # magenta
-        color5   #B48EAD
-        color13  #B48EAD
-
-        # cyan
-        color6   #88C0D0
-        color14  #8FBCBB
-
-        # white
-        color7   #E5E9F0
-        color15  #ECEFF4
-      '';
-    };
-  };
-wayland.windowManager.hyprland.enable = true;
-  wayland.windowManager.hyprland.extraConfig = ''
+  wayland.windowManager.hyprland = {
+    extraConfig = ''
       $mainMod = SUPER 
       monitor=,preferred,auto,1 
 
       input {
         kb_layout = us
-        kb_variant =
-        kb_model =
-        kb_options = caps:escape
-        kb_rules =
-
-        follow_mouse = 2 # 0|1|2|3
-        float_switch_override_focus = 2
-        numlock_by_default = true
-
-        touchpad {
-        natural_scroll = yes
-        }
-
-        sensitivity = 0 # -1.0 - 1.0, 0 means no modification.
+        follow_mouse = 2 
+        sensitivity = 0 
       }
 
       general {
         gaps_in = 3
         gaps_out = 5
         border_size = 3
-        col.active_border = rgb(81a1c1)
-        col.inactive_border = rgba(595959aa)
-
+        col.active_border = rgb(ffc0cb)
+        col.inactive_border = rgb(2e3440)
         layout = dwindle # master|dwindle 
       }
 
@@ -146,26 +86,16 @@ wayland.windowManager.hyprland.enable = true;
         inactive_opacity = 1.0
         fullscreen_opacity = 1.0
         drop_shadow = false
-        shadow_range = 4
-        shadow_render_power = 3
-        shadow_ignore_window = true
-      # col.shadow = 
-      # col.shadow_inactive
-      # shadow_offset
         dim_inactive = false
-      # dim_strength = #0.0 ~ 1.0
-        col.shadow = rgba(1a1a1aee)
-
           blur {
               enabled = true
               size = 3
-              passes = 3
+              passes = 1
               new_optimizations = true
               xray = true
               ignore_opacity = false
           }
       }
-
       animations {
         enabled=1
         bezier = overshot, 0.13, 0.99, 0.29, 1.1
@@ -187,21 +117,15 @@ wayland.windowManager.hyprland.enable = true;
         focus_on_activate = true
       }
 
-      bind = $mainMod, Return, exec, kitty
-      bind = $mainMod SHIFT, Return, exec, kitty --class="termfloat"
-      bind = $mainMod SHIFT, P, killactive,
+      bind = $mainMod, Return, exec, foot 
+      bind = $mainMod SHIFT, Return, exec, foot --class="termfloat"
+      bind = $mainMod, Q, killactive,
       bind = $mainMod SHIFT, Q, exit,
-      bind = $mainMod SHIFT, Space, togglefloating,
-      bind = $mainMod,F,fullscreen
-      bind = $mainMod,Y,pin
-      bind = $mainMod, P, pseudo, # dwindle
-      bind = $mainMod, J, togglesplit, # dwindle
-
-      #-----------------------#
-      # Toggle grouped layout #
-      #-----------------------#
-      bind = $mainMod, K, togglegroup,
-      bind = $mainMod, Tab, changegroupactive, f
+      bind = $mainMod,Space, togglefloating,
+      bind = $mainMod, F,fullscreen
+      bind = $mainMod, Y,pin
+      bind = $mainMod, o, pseudo, # dwindle
+      bind = $mainMod, T, togglesplit, # dwindle
 
       #------------#
       # change gap #
@@ -212,10 +136,10 @@ wayland.windowManager.hyprland.enable = true;
       #--------------------------------------#
       # Move focus with mainMod + arrow keys #
       #--------------------------------------#
-      bind = $mainMod, left, movefocus, l
-      bind = $mainMod, right, movefocus, r
-      bind = $mainMod, up, movefocus, u
-      bind = $mainMod, down, movefocus, d
+      bind = $mainMod, h, movefocus, l
+      bind = $mainMod, l, movefocus, r
+      bind = $mainMod, k, movefocus, u
+      bind = $mainMod, j, movefocus, d
 
       #----------------------------------------#
       # Switch workspaces with mainMod + [0-9] #
@@ -230,12 +154,8 @@ wayland.windowManager.hyprland.enable = true;
       bind = $mainMod, 8, workspace, 8
       bind = $mainMod, 9, workspace, 9
       bind = $mainMod, 0, workspace, 10
-      bind = $mainMod, L, workspace, +1
-      bind = $mainMod, H, workspace, -1
-      bind = $mainMod, period, workspace, e+1
-      bind = $mainMod, comma, workspace,e-1
-      bind = $mainMod, T, workspace,TG
-      bind = $mainMod, M, workspace,Music
+      bind = $mainMod, n, workspace, e+1
+      bind = $mainMod, p, workspace,e-1
 
       #-------------------------------#
       # special workspace(scratchpad) #
@@ -246,10 +166,10 @@ wayland.windowManager.hyprland.enable = true;
       #----------------------------------#
       # move window in current workspace #
       #----------------------------------#
-      bind = $mainMod SHIFT,left ,movewindow, l
-      bind = $mainMod SHIFT,right ,movewindow, r
-      bind = $mainMod SHIFT,up ,movewindow, u
-      bind = $mainMod SHIFT,down ,movewindow, d
+      bind = $mainMod SHIFT,h,movewindow, l
+      bind = $mainMod SHIFT,l,movewindow, r
+      bind = $mainMod SHIFT,k,movewindow, u
+      bind = $mainMod SHIFT,j,movewindow, d
 
       #---------------------------------------------------------------#
       # Move active window to a workspace with mainMod + ctrl + [0-9] #
@@ -264,8 +184,8 @@ wayland.windowManager.hyprland.enable = true;
       bind = $mainMod CTRL, 8, movetoworkspace, 8
       bind = $mainMod CTRL, 9, movetoworkspace, 9
       bind = $mainMod CTRL, 0, movetoworkspace, 10
-      bind = $mainMod CTRL, left, movetoworkspace, -1
-      bind = $mainMod CTRL, right, movetoworkspace, +1
+      bind = $mainMod CTRL, p, movetoworkspace, -1
+      bind = $mainMod CTRL, n, movetoworkspace, +1
       # same as above, but doesnt switch to the workspace
       bind = $mainMod SHIFT, 1, movetoworkspacesilent, 1
       bind = $mainMod SHIFT, 2, movetoworkspacesilent, 2
@@ -290,14 +210,11 @@ wayland.windowManager.hyprland.enable = true;
       }
       bind=$mainMod,slash,workspace,previous
 
-      #------------------------#
-      # quickly launch program #
-      #------------------------# 
-      bind=$mainMod,bracketleft,exec,grimblast --notify --cursor  copysave area ~/Pictures/$(date "+%Y-%m-%d"T"%H:%M:%S_no_watermark").png
-      bind=$mainMod,bracketright,exec, grimblast --notify --cursor  copy area
+      bind=$mainMod,z,exec, pkill rofi || rofi -show drun -theme ~/.config/rofi/launcher 
+      bind=$mainMod,X,exec, bash ~/.config/rofi/powermenu.sh
 
       #-----------------------------------------#
-      # control volume,brightness,media players-#
+      # control volume,media players-#
       #-----------------------------------------#
       bind=,XF86AudioRaiseVolume,exec, pamixer -i 5
       bind=,XF86AudioLowerVolume,exec, pamixer -d 5
@@ -317,10 +234,6 @@ wayland.windowManager.hyprland.enable = true;
       #---------------#
       bind=ALT,R,submap,resize
       submap=resize
-      binde=,right,resizeactive,15 0
-      binde=,left,resizeactive,-15 0
-      binde=,up,resizeactive,0 -15
-      binde=,down,resizeactive,0 15
       binde=,l,resizeactive,15 0
       binde=,h,resizeactive,-15 0
       binde=,k,resizeactive,0 -15
@@ -328,29 +241,21 @@ wayland.windowManager.hyprland.enable = true;
       bind=,escape,submap,reset 
       submap=reset
 
-      bind=CTRL SHIFT, left, resizeactive,-15 0
-      bind=CTRL SHIFT, right, resizeactive,15 0
-      bind=CTRL SHIFT, up, resizeactive,0 -15
-      bind=CTRL SHIFT, down, resizeactive,0 15
-      bind=CTRL SHIFT, l, resizeactive, 15 0
-      bind=CTRL SHIFT, h, resizeactive,-15 0
+      bind=CTRL SHIFT, h, resizeactive, 15 0
+      bind=CTRL SHIFT, l, resizeactive,-15 0
       bind=CTRL SHIFT, k, resizeactive, 0 -15
       bind=CTRL SHIFT, j, resizeactive, 0 15
 
       bindm = $mainMod, mouse:272, movewindow
       bindm = $mainMod, mouse:273, resizewindow
 
-      #-----------------------#
-      # wall(by swww service) #
-      #-----------------------#
-      # exec-once = default_wall 
 
       #------------#
       # auto start #
       #------------#
-      exec-once = waybar &
+      exec-once = ${launch_waybar}/bin/launch_waybar &
       exec-once = mako &
-      exec-once = nm-applet &
+      exec-once = swww init &
 
       #---------------#
       # windows rules #
@@ -378,17 +283,13 @@ wayland.windowManager.hyprland.enable = true;
       windowrule=move 25%-,nemo
       windowrule=size 960 540,nemo
       windowrule=opacity 0.95,title:Telegram
-      windowrule=animation slide right,kitty
+      windowrule=animation slide right,foot
       windowrule=workspace name:TG, title:Telegram
       windowrule=workspace name:Music, musicfox
       windowrule=float,ncmpcpp
       windowrule=move 25%-,ncmpcpp
       windowrule=size 960 540,ncmpcpp
       windowrule=noblur,^(firefox)$
-
-      #-----------------#
-      # workspace rules #
-      #-----------------#
-      workspace=HDMI-A-1,10
     '';
+  };
 }
