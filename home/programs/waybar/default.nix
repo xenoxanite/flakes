@@ -31,9 +31,9 @@
         background-color: transparent;
       }
       window > box {
-        margin-left: 5px;
+        /* margin-left: 5px;
         margin-right: 5px;
-        margin-top: 5px;
+        margin-top: 5px; */
         background-color: rgb(30, 30, 46);
       }
       #workspaces {
@@ -97,10 +97,10 @@
         padding-left: 10px;
       }
       #window {
-        opacity: 0.7;
+        opacity: 0.5;
         color: #414868;
         font-style: italic;
-        font-size: 11pt;
+        font-size: 10pt;
       }
     '';
     settings = [{

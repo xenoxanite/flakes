@@ -5,5 +5,6 @@
     ./impermanence.nix
     ./fonts.nix
     ./networking.nix
+    ./virtualization.nix
   ];
 }

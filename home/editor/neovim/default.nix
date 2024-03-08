@@ -22,10 +22,10 @@
       ];
     };
   };
-  xdg.configFile."nvim".source = pkgs.fetchFromGitHub {
-    owner = "xenoxanite";
-    repo = "nvim";
-    rev = "main";
-    hash = "sha256-kJZc5+IKaeA+vHLdJS4hiIOenHlR30TmPtYrCY9Tw24=";
-  };
+  # xdg.configFile."nvim".source = pkgs.fetchFromGitHub {
+  #   owner = "xenoxanite";
+  #   repo = "nvim";
+  #   rev = "main";
+  #   hash = "sha256-kJZc5+IKaeA+vHLdJS4hiIOenHlR30TmPtYrCY9Tw24=";
+  # };
 }

@@ -17,6 +17,8 @@
       imv 
       mpv
       bat
+      yt-dlp
+      chromium
     ];
     variables.NIXOS_OZONE_WL = "1";
   };

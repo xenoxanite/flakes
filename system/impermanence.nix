@@ -7,6 +7,7 @@
     directories = [
       "/etc/nixos"
       "/var/lib/nixos"
+      "/var/lib/waydroid/"
       "/var/lib/systemd/coredump"
       "/etc/NetworkManager/system-connections"
     ];

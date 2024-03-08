@@ -1,4 +1,5 @@
 { pkgs, inputs, user, ... }: {
+  home.packages = [ pkgs.tor-browser pkgs.google-chrome ];
   programs.firefox = {
     enable = true;
     package = pkgs.wrapFirefox pkgs.firefox-unwrapped {

@@ -5,7 +5,14 @@
     systemd.enable = true;
   };
 
-  home.packages = with pkgs; [ swww wf-recorder wl-clipboard cliphist swaylock ];
+  home.packages = with pkgs; [
+    swww
+    wf-recorder
+    wl-clipboard
+    cliphist
+    swaylock
+    grimblast
+  ];
   systemd.user.targets.hyprland-session.Unit.Wants =
     [ "xdg-desktop-autostart.target" ];
   home = {

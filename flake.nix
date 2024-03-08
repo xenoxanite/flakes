@@ -1,6 +1,6 @@
 {
   description = "Nixos config flake";
-     
+
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
@@ -9,21 +9,22 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    impermanence = {
-      url = "github:nix-community/impermanence";
-    };
+    impermanence = { url = "github:nix-community/impermanence"; };
 
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nur = {
-      url = "github:nix-community/NUR";
-    };
+    nur = { url = "github:nix-community/NUR"; };
 
     neovim-nightly-overlay = {
       url = "github:nix-community/neovim-nightly-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    spicetify-nix = {
+      url = "github:the-argus/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -41,22 +42,19 @@
 
   };
 
-  outputs = {nixpkgs, self, ...} @ inputs:
+  outputs = { nixpkgs, self, ... }@inputs:
 
- let
+    let
       selfPkgs = import ./pkgs;
       system = "x86_64-linux";
       user = "xenoxanite";
       inherit (nixpkgs) lib;
-    in 
-  {
-packages = nixpkgs.legacyPackages.${system};
+    in {
+      packages = nixpkgs.legacyPackages.${system};
       overlays.default = selfPkgs.overlay;
-    nixosConfigurations.oxygen = nixpkgs.lib.nixosSystem {
-      specialArgs = {inherit inputs self user;};
-      modules = [
-        ./hosts/oxygen
-      ];
+      nixosConfigurations.oxygen = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs self user; };
+        modules = [ ./hosts/oxygen ];
+      };
     };
-  };
 }

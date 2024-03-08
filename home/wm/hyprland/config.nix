@@ -32,7 +32,7 @@ let
   '';
 in {
   services.swayidle = {
-    enable = true;
+    enable = false;
     events = [{
       event = "before-sleep";
       command = "${myswaylock}/bin/myswaylock";
@@ -89,8 +89,8 @@ in {
         dim_inactive = false
           blur {
               enabled = true
-              size = 3
-              passes = 3
+              size = 4
+              passes = 2
               new_optimizations = true
               ignore_opacity = false
           }
@@ -98,11 +98,11 @@ in {
       animations {
         enabled=1
         bezier = overshot, 0.13, 0.99, 0.29, 1.1
-        animation = windows, 1, 4, overshot, slide
-        animation = windowsOut, 1, 5, default, popin 80%
-        animation = border, 1, 5, default
-        animation = fade, 1, 8, default
-        animation = workspaces, 1, 6, overshot, slidevert
+        animation = windows, 1, 3, overshot, slide
+        animation = windowsOut, 1, 4, default, popin 80%
+        animation = border, 1, 4, default
+        animation = fade, 1, 6, default
+        animation = workspaces, 1, 4, overshot, slidevert
       }
 
       misc {
@@ -283,7 +283,7 @@ in {
       windowrule=size 960 540,nemo
       windowrule=opacity 0.95,title:Telegram
       windowrule=animation slide right,foot
-      windowrule=workspace name:TG, title:Telegram
+      windowrule=workspace 4, discord
       windowrule=workspace name:Music, musicfox
       windowrule=float,ncmpcpp
       windowrule=move 25%-,ncmpcpp

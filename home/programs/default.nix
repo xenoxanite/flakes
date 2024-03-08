@@ -10,5 +10,6 @@
     ./firefox
     ./discord
     ./btop
+    ./spotify
   ];
 }
