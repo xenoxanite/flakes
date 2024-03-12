@@ -48,7 +48,7 @@
       selfPkgs = import ./pkgs;
       system = "x86_64-linux";
       user = "xenoxanite";
-      inherit (nixpkgs) lib;
+      inherit nixpkgs;
     in {
       packages = nixpkgs.legacyPackages.${system};
       overlays.default = selfPkgs.overlay;
