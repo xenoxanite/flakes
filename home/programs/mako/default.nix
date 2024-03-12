@@ -7,7 +7,7 @@
     margin = "10";
     padding = "5";
     borderSize = 3;
-    borderRadius = 3;
+    borderRadius = 0;
     backgroundColor = "#1E1D2F";
     borderColor = "#96CDFB";
     progressColor = "over #302D41";

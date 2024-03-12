@@ -1,6 +1,6 @@
 {
   imports = [
-    ./foot
+    ./kitty
     ./fish
     ./git
     ./gtk

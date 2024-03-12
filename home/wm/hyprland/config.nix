@@ -30,6 +30,7 @@ let
       ${pkgs.systemd}/bin/systemctl suspend
     fi
   '';
+  moncle = pkgs.writeShellScript "moncle" "\n";
 in {
   services.swayidle = {
     enable = false;
@@ -57,7 +58,7 @@ in {
         gaps_in = 3
         gaps_out = 5
         border_size = 3
-        col.active_border = rgb(ffc0cb)
+        col.active_border = rgb(89B4FA)
         col.inactive_border = rgb(2e3440)
         layout = dwindle # master|dwindle 
       }
@@ -89,8 +90,8 @@ in {
         dim_inactive = false
           blur {
               enabled = true
-              size = 4
-              passes = 2
+              size = 3
+              passes = 3
               new_optimizations = true
               ignore_opacity = false
           }
@@ -98,11 +99,11 @@ in {
       animations {
         enabled=1
         bezier = overshot, 0.13, 0.99, 0.29, 1.1
-        animation = windows, 1, 3, overshot, slide
-        animation = windowsOut, 1, 4, default, popin 80%
-        animation = border, 1, 4, default
-        animation = fade, 1, 6, default
-        animation = workspaces, 1, 4, overshot, slidevert
+        animation = windows, 1, 4, overshot, slide
+        animation = windowsOut, 1, 4, default, popin 50%
+        animation = border, 1, 5, default
+        animation = fade, 1, 8, default
+        animation = workspaces, 1, 6, overshot, slidevert
       }
 
       misc {
@@ -116,8 +117,8 @@ in {
         focus_on_activate = true
       }
 
-      bind = $mainMod, Return, exec, foot 
-      bind = $mainMod SHIFT, Return, exec, foot --class="termfloat"
+      bind = $mainMod, Return, exec, kitty
+      bind = $mainMod SHIFT, Return, exec, kitty --class="termfloat"
       bind = $mainMod, Q, killactive,
       bind = $mainMod SHIFT, Q, exit,
       bind = $mainMod,Space, togglefloating,
@@ -209,8 +210,11 @@ in {
       }
       bind=$mainMod,slash,workspace,previous
 
-      bind=$mainMod,z,exec, pkill rofi || rofi -show drun -theme ~/.config/rofi/launcher 
-      bind=$mainMod,X,exec, bash ~/.config/rofi/powermenu.sh
+      bind=$mainMod,z,exec, pkill rofi || rofi -show drun -show-icons -theme ~/.config/rofi/launcher 
+      bind=$mainMod,C,exec, rofi -show calc -theme ~/.config/rofi/launcher.rasi
+      bind=$mainMod,X,exec, rofi -show p -modi p:~/.config/rofi/off.sh -theme ~/.config/rofi/launcher.rasi
+      bind=$mainMod,E,exec, rofi -modi emoji -show emoji -theme ~/.config/rofi/launcher.rasi
+      bind=$mainMod,V,exec, cliphist list | rofi -dmenu -theme ~/.config/rofi/launcher.rasi | cliphist decode | wl-copy
 
       # volume control
       bind=,XF86AudioRaiseVolume,exec, pamixer -i 5
@@ -253,6 +257,8 @@ in {
       # auto start #
       #------------#
       exec-once = ${launch_waybar}/bin/launch_waybar &
+      exec-once = wl-paste --type text --watch cliphist store &
+      exec-once = wl-paste --type image --watch cliphist store &
       exec-once = mako &
       exec-once = swww init &
 
@@ -261,8 +267,9 @@ in {
       #---------------#
       #`hyprctl clients` get class、title...
       windowrule=float,title:^(Picture-in-Picture)$
-      windowrule=size 960 540,title:^(Picture-in-Picture)$
-      windowrule=move 25%-,title:^(Picture-in-Picture)$
+      windowrule=size 480 270,title:^(Picture-in-Picture)$
+      windowrule=pin,title:^(Picture-in-Picture)$
+      windowrule=move 70%-,title:^(Picture-in-Picture)$
       windowrule=float,imv
       windowrule=move 25%-,imv
       windowrule=size 960 540,imv
@@ -277,12 +284,11 @@ in {
       windowrule=float,termfloat
       windowrule=move 25%-,termfloat
       windowrule=size 960 540,termfloat
-      windowrule=rounding 5,termfloat
       windowrule=float,nemo
       windowrule=move 25%-,nemo
       windowrule=size 960 540,nemo
       windowrule=opacity 0.95,title:Telegram
-      windowrule=animation slide right,foot
+      windowrule=animation slide right,kitty
       windowrule=workspace 4, discord
       windowrule=workspace name:Music, musicfox
       windowrule=float,ncmpcpp

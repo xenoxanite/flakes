@@ -20,7 +20,9 @@
           color: rgb(26, 24, 38);
         }
       }
-      .warning, .critical, .urgent {
+      .warning,
+      .critical,
+      .urgent {
         animation-name: blink_red;
         animation-duration: 1s;
         animation-timing-function: linear;
@@ -31,9 +33,6 @@
         background-color: transparent;
       }
       window > box {
-        /* margin-left: 5px;
-        margin-right: 5px;
-        margin-top: 5px; */
         background-color: rgb(30, 30, 46);
       }
       #workspaces {
@@ -45,7 +44,7 @@
         padding-bottom: 5px;
         padding-left: 6px;
         padding-right: 6px;
-        color:#D8DEE9;
+        color: #d8dee9;
       }
       #workspaces button.active {
         background-color: rgb(181, 232, 224);
@@ -55,7 +54,7 @@
         color: rgb(26, 24, 38);
       }
       #workspaces button:hover {
-        background-color: #B38DAC;
+        background-color: #b38dac;
         color: rgb(26, 24, 38);
       }
       tooltip {
@@ -69,7 +68,12 @@
         padding-right: 6px;
         color: rgb(201, 203, 255);
       }
-      #window, #clock, #memory,#cpu, #pulseaudio, #network {
+      #window,
+      #clock,
+      #memory,
+      #cpu,
+      #pulseaudio,
+      #network {
         padding-left: 10px;
         padding-right: 10px;
       }
@@ -80,44 +84,46 @@
         color: rgb(245, 194, 231);
       }
       #clock {
-        color: rgb(217, 224, 238);
+        color: #eba0ac;
       }
       #pulseaudio {
         color: rgb(245, 224, 220);
       }
+      #clock {
+          color: rgb(242, 143, 173);
+      }
       #network {
-        color: #ABE9B3;
+        color: #abe9b3;
       }
 
       #network.disconnected {
         color: rgb(255, 255, 255);
       }
       #tray {
-        padding-right: 8px;
-        padding-left: 10px;
+        padding-right: 12px;
+        padding-left: 8px;
       }
       #window {
-        opacity: 0.5;
+        opacity: 0.9;
         color: #414868;
         font-style: italic;
+        padding-left: 14px;
         font-size: 10pt;
       }
     '';
     settings = [{
       "layer" = "top";
-      "position" = "top";
-      modules-left =
-        [ "custom/launcher" "hyprland/workspaces" "hyprland/window" ];
-      modules-center = [ "clock" ];
-      modules-right = [ "pulseaudio" "memory" "cpu" "network" "tray" ];
-      "custom/launcher" = {
-        "format" = " ";
-        "on-click" = "pkill rofi || ~/.config/rofi/launcher.sh";
-        "tooltip" = false;
-      };
+      "position" = "bottom";
+      modules-left = [ "hyprland/workspaces" "hyprland/window" ];
+      modules-right = [ "pulseaudio" "memory" "cpu" "network" "clock" "tray" ];
       "hyprland/workspaces" = {
         "format" = "{name}";
         "on-click" = "activate";
+      };
+
+      "hyprland/window" = {
+        "max-length" = 200;
+        "separate-outputs" = true;
       };
       "pulseaudio" = {
         "scroll-step" = 1;
@@ -129,7 +135,7 @@
       };
       "clock" = {
         "interval" = 1;
-        "format" = "{:%I:%M %p  %A %b %d}";
+        "format" = "{:%I:%M %p}";
         "tooltip" = true;
         "tooltip-format" = ''
           {=%A; %d %B %Y}
@@ -147,8 +153,6 @@
       "network" = {
         "format-disconnected" = "󰯡 Disconnected";
         "format-ethernet" = "󰀂 {ifname}";
-        "format-linked" = "󰖪 {essid} (No IP)";
-        "format-wifi" = "󰖩 {essid}";
         "interval" = 1;
         "tooltip" = false;
       };
