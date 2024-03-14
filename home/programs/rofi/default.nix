@@ -6,6 +6,6 @@
   };
   home.file = {
     ".config/rofi/off.sh".source = ./off.sh;
-    ".config/rofi/launcher.rasi".source =  ./launcher.rasi;
+    ".config/rofi/launcher.rasi".source = ./launcher.rasi;
   };
 }

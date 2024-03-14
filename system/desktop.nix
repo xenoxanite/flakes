@@ -1,7 +1,6 @@
 { pkgs, ... }: {
   programs = { dconf.enable = true; };
 
-
   environment = {
     systemPackages = with pkgs; [
       libnotify
@@ -14,11 +13,12 @@
       playerctl
       pulsemixer
       imagemagick
-      imv 
+      imv
       mpv
       bat
       yt-dlp
       chromium
+      telegram-desktop
     ];
     variables.NIXOS_OZONE_WL = "1";
   };

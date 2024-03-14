@@ -135,7 +135,7 @@
       };
       "clock" = {
         "interval" = 1;
-        "format" = "{:%I:%M %p}";
+        "format" = " {:%I:%M %p}";
         "tooltip" = true;
         "tooltip-format" = ''
           {=%A; %d %B %Y}

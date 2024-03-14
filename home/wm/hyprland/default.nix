@@ -8,6 +8,7 @@
   home.packages = with pkgs; [
     swww
     wf-recorder
+    waypaper
     wl-clipboard
     cliphist
     swaylock

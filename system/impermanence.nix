@@ -6,9 +6,7 @@
     hideMounts = true;
     directories = [
       "/etc/nixos"
-      "/var/lib/nixos"
-      "/var/lib/waydroid/"
-      "/var/lib/systemd/coredump"
+      "/var/lib/"
       "/etc/NetworkManager/system-connections"
     ];
     files = [
@@ -23,6 +21,7 @@
         "dev"
         "docs"
         "vids"
+        "virt"
         "pics"
         "Downloads"
         {

@@ -1,6 +1,10 @@
-{
+{ user, ... }: {
   virtualisation = {
     waydroid.enable = true;
-    # lxd.enable = true;
+    libvirtd.enable = true;
   };
+  programs.virt-manager.enable = true;
+  networking.firewall.trustedInterfaces = [ "virbr0" ];
+  programs.dconf.enable = true;
+  users.groups.libvirtd.members = [ "${user}" ];
 }

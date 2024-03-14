@@ -56,7 +56,7 @@ in {
 
       general {
         gaps_in = 3
-        gaps_out = 5
+        gaps_out = 6
         border_size = 3
         col.active_border = rgb(89B4FA)
         col.inactive_border = rgb(2e3440)
@@ -117,8 +117,9 @@ in {
         focus_on_activate = true
       }
 
-      bind = $mainMod, Return, exec, kitty
-      bind = $mainMod SHIFT, Return, exec, kitty --class="termfloat"
+      bind = $mainMod, Return, exec, kitty -1 --start-as minimized
+      bind = $mainMod SHIFT, Return, exec, kitty -1 --start-as minimized --class="termfloat"
+      bind = $mainMod, W, exec, waypaper
       bind = $mainMod, Q, killactive,
       bind = $mainMod SHIFT, Q, exit,
       bind = $mainMod,Space, togglefloating,
@@ -130,8 +131,8 @@ in {
       #------------#
       # change gap #
       #------------#
-      bind = $mainMod SHIFT, G,exec,hyprctl --batch "keyword general:gaps_out 5;keyword general:gaps_in 3"
-      bind = $mainMod , G,exec,hyprctl --batch "keyword general:gaps_out 0;keyword general:gaps_in 0"
+      bind = $mainMod SHIFT, G,exec,hyprctl --batch "keyword general:gaps_out 6;keyword general:gaps_in 3;keyword general:border_size 3"
+      bind = $mainMod , G,exec,hyprctl --batch "keyword general:gaps_out 0;keyword general:gaps_in 0;keyword general:border_size 0"
 
       #--------------------------------------#
       # Move focus with mainMod + arrow keys #
@@ -237,17 +238,17 @@ in {
       #---------------#
       bind=ALT,R,submap,resize
       submap=resize
-      binde=,l,resizeactive,15 0
-      binde=,h,resizeactive,-15 0
-      binde=,k,resizeactive,0 -15
-      binde=,j,resizeactive,0 15
+      binde=,l,resizeactive,40 0
+      binde=,h,resizeactive,-40 0
+      binde=,k,resizeactive,0 -40
+      binde=,j,resizeactive,0 40
       bind=,escape,submap,reset 
       submap=reset
 
-      bind=CTRL SHIFT, l, resizeactive, 15 0
-      bind=CTRL SHIFT, h, resizeactive,-15 0
-      bind=CTRL SHIFT, k, resizeactive, 0 -15
-      bind=CTRL SHIFT, j, resizeactive, 0 15
+      bind=ALT SHIFT, l, resizeactive, 40 0
+      bind=ALT SHIFT, h, resizeactive,-40 0
+      bind=ALT SHIFT, k, resizeactive, 0 -40
+      bind=ALT SHIFT, j, resizeactive, 0 40
 
       bindm = $mainMod, mouse:272, movewindow
       bindm = $mainMod, mouse:273, resizewindow
@@ -284,6 +285,11 @@ in {
       windowrule=float,termfloat
       windowrule=move 25%-,termfloat
       windowrule=size 960 540,termfloat
+
+      windowrule=float,waypaper
+      windowrule=move 25%-,waypaper
+      windowrule=size 960 540,waypaper
+
       windowrule=float,nemo
       windowrule=move 25%-,nemo
       windowrule=size 960 540,nemo
