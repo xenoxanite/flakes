@@ -30,7 +30,6 @@ let
       ${pkgs.systemd}/bin/systemctl suspend
     fi
   '';
-  moncle = pkgs.writeShellScript "moncle" "\n";
 in {
   services.swayidle = {
     enable = false;
@@ -97,7 +96,7 @@ in {
           }
       }
       animations {
-        enabled=1
+        enabled=0
         bezier = overshot, 0.13, 0.99, 0.29, 1.1
         animation = windows, 1, 4, overshot, slide
         animation = windowsOut, 1, 4, default, popin 50%

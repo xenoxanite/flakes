@@ -8,7 +8,7 @@
     style = ''
       * {
         font-family: "JetBrainsMono Nerd Font";
-        font-size: 14pt;
+        font-size: 18px;
         font-weight: bold;
         border-radius: 0px;
         transition-property: background-color;

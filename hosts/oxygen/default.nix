@@ -79,6 +79,7 @@
       KERNEL=="card0", SUBSYSTEM=="drm", DRIVERS=="amdgpu", ATTR{device/power_dpm_force_performance_level}="high"
     '';
     getty.autologinUser = "xenoxanite";
+    gvfs.enable = true;
   };
 
   system.stateVersion = "23.11"; # Did you read the comment?

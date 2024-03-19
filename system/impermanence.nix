@@ -4,11 +4,8 @@
   fileSystems."/persist".neededForBoot = true;
   environment.persistence."/persist/system" = {
     hideMounts = true;
-    directories = [
-      "/etc/nixos"
-      "/var/lib/"
-      "/etc/NetworkManager/system-connections"
-    ];
+    directories =
+      [ "/etc/nixos" "/var/lib/" "/etc/NetworkManager/system-connections" ];
     files = [
       "/etc/machine-id"
       {
