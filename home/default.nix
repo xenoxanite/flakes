@@ -1,9 +1,9 @@
-{ inputs, self, user, ... }: {
+{ inputs, self, user, pkgs-master, ... }: {
   imports = [ inputs.home-manager.nixosModules.home-manager ];
   home-manager = {
     useUserPackages = true;
     useGlobalPkgs = true;
-    extraSpecialArgs = { inherit inputs user; };
+    extraSpecialArgs = { inherit inputs user pkgs-master; };
     users.${user} = {
       imports = [ ./wm/hyprland ./programs ./editor/neovim ];
       home = {

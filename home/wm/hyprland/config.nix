@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs,pkgs-master,  ... }:
 let
   myswaylock = pkgs.writeShellScriptBin "myswaylock" ''
     ${pkgs.swaylock-effects}/bin/swaylock  \
@@ -19,7 +19,7 @@ let
   '';
   launch_waybar = pkgs.writeShellScriptBin "launch_waybar" ''
     killall .waybar-wrapped
-    ${pkgs.waybar}/bin/waybar > /dev/null 2>&1 &
+    ${pkgs-master.waybar}/bin/waybar > /dev/null 2>&1 &
   '';
   suspendScript = pkgs.writeShellScript "suspend-script" ''
     RUNNING_COUNT=$(${pkgs.pipewire}/bin/pw-cli i all | ${pkgs.ripgrep}/bin/rg "state: \"running\"" -c || true)
@@ -54,16 +54,16 @@ in {
       }
 
       general {
-        gaps_in = 3
-        gaps_out = 6
-        border_size = 3
+        gaps_in = 5
+        gaps_out = 10
+        border_size = 0
         col.active_border = rgb(89B4FA)
         col.inactive_border = rgb(2e3440)
         layout = dwindle # master|dwindle 
       }
 
       dwindle {
-        no_gaps_when_only = false
+        no_gaps_when_only = true 
         force_split = 0 
         special_scale_factor = 0.8
         split_width_multiplier = 1.0 
@@ -130,7 +130,7 @@ in {
       #------------#
       # change gap #
       #------------#
-      bind = $mainMod SHIFT, G,exec,hyprctl --batch "keyword general:gaps_out 6;keyword general:gaps_in 3;keyword general:border_size 3"
+      bind = $mainMod SHIFT, G,exec,hyprctl --batch "keyword general:gaps_out 10;keyword general:gaps_in 5;keyword general:border_size 0"
       bind = $mainMod , G,exec,hyprctl --batch "keyword general:gaps_out 0;keyword general:gaps_in 0;keyword general:border_size 0"
 
       #--------------------------------------#

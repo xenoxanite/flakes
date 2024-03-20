@@ -31,11 +31,8 @@
         lockPref("privacy.clearOnShutdown.history", false);
         lockPref("privacy.clearOnShutdown.sessions", false);
 
-        // remove the screenborders, makes you fingerprintable
         lockPref("privacy.resistFingerprinting.letterboxing",false);
-        // Use system colors
         lockPref("browser.display.use_system_colors",true);
-        // Enable startup page
         lockPref("browser.startup.page",0);
         // Enable search suggestions
         lockPref("browser.search.suggest.enabled",true);
@@ -102,6 +99,8 @@
           "Wikipedia (en)".metaData.hidden = true;
           "DuckDuckGo".metaData.alias = "@d";
           "MyNixOS" = {
+            icon =
+              "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
             urls =
               [{ template = "https://mynixos.com/search?q={searchTerms}"; }];
             definedAliases = [ "@mn" ];
@@ -139,23 +138,12 @@
         "distribution.searchplugins.defaultLocale" = "en-US";
         "general.useragent.locale" = "en-US";
         "browser.bookmarks.showMobileBookmarks" = true;
-        # Fix big fonts in 1080p screen
-
-        # Always use XDG portals for stuff
         "widget.use-xdg-desktop-portal.file-picker" = 2;
-
-        # Enable userChrome.css
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
-
-        # Automatically enable extensions installed by home-manager
         "extensions.autoDisableScopes" = 0;
-
-        # Deactivate disk cache to reduce unnecessary disk writes
         "browser.cache.disk.enable" = false;
         "browser.cache.memory.enable" = true;
         "browser.cache.memory.capacity" = 1048576; # 1GiB
-
-        # Autoplay
         "media.autoplay.block-event.enabled" = true;
         "media.autoplay.default" = 5;
 
@@ -188,8 +176,6 @@
         "privacy.webrtc.legacyGlobalIndicator" = false; # Sharing indicator
         "signon.autofillForms" = false;
         "signon.rememberSignons" = false;
-
-        # Disable telemetry
         "app.shield.optoutstudies.enabled" = false;
         "browser.discovery.enabled" = false;
         "datareporting.healthreport.uploadEnabled" = false;
