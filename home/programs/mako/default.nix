@@ -8,15 +8,15 @@
     padding = "5";
     borderSize = 3;
     borderRadius = 0;
-    backgroundColor = "#1E1D2F";
-    borderColor = "#96CDFB";
-    progressColor = "over #302D41";
-    textColor = "#D9E0EE";
+    backgroundColor = "#101419";
+    borderColor = "#8cc1ff";
+    progressColor = "over #94f7c5";
+    textColor = "#b6beca";
     defaultTimeout = 5000;
     extraConfig = ''
       text-alignment=center
       [urgency=high]
-      border-color=#F8BD96
+      border-color=#fc7b81
     '';
   };
 }

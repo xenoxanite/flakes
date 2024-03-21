@@ -56,7 +56,6 @@
     packages = with pkgs; [ firefox fd fzf eza ];
   };
   programs = {
-    hyprland.enable = true;
     nano.enable = false;
     fish.enable = true;
     fuse.userAllowOther = true;

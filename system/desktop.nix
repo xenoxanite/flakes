@@ -4,10 +4,7 @@
   environment = {
     systemPackages = with pkgs; [
       libnotify
-      wayland
-      pkgs.qt6.qtwayland
       cinnamon.nemo
-      wf-recorder
       xdg-utils
       pamixer
       playerctl
@@ -44,7 +41,9 @@
     };
   };
 
+  programs.hyprland.enable = true;
   security.rtkit.enable = true;
+
   systemd = {
     user.services.polkit-gnome-authentication-agent-1 = {
       description = "polkit-gnome-authentication-agent-1";

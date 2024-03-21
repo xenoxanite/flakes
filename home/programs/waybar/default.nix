@@ -3,13 +3,6 @@
     enable = true;
     package = pkgs-master.waybar;
     style = ''
-      #window {
-        font-size: 10pt;
-        opacity: 0.9;
-        color: #414868;
-        font-style: italic;
-        padding-left: 12px;
-      }
       * {
         font-family: "JetBrainsMono Nerd Font";
         font-weight: bold;
@@ -19,8 +12,8 @@
       }
       @keyframes blink_red {
         to {
-          background-color: rgb(242, 143, 173);
-          color: rgb(26, 24, 38);
+          background-color: #fc7b81;
+          color: #101419;
         }
       }
       .warning,
@@ -36,9 +29,10 @@
         background-color: transparent;
       }
       window > box {
-        background-color: rgb(30, 30, 46);
+        background-color: #101419;
       }
       #workspaces {
+        font-size: 14pt;
         padding-left: 0px;
         padding-right: 4px;
       }
@@ -47,121 +41,76 @@
         padding-bottom: 5px;
         padding-left: 6px;
         padding-right: 6px;
-        color: #d8dee9;
+        color: #384148;
       }
       #workspaces button.active {
-        background-color: rgb(181, 232, 224);
-        color: rgb(26, 24, 38);
+        background-color: #94f7c5;
+        color: #101419;
       }
       #workspaces button.urgent {
-        color: rgb(26, 24, 38);
+        color: #fc7b81;
       }
       #workspaces button:hover {
         background-color: #b38dac;
         color: rgb(26, 24, 38);
       }
-      tooltip {
-        background: rgb(48, 45, 65);
-      }
-      tooltip label {
-        color: rgb(217, 224, 238);
-      }
-      #custom-launcher {
-        padding-left: 8px;
-        padding-right: 6px;
-        color: rgb(201, 203, 255);
-      }
-
-
-      #workspaces,
-      #clock,
-      #memory,
-      #cpu,
-      #pulseaudio,
-      #network {
-        font-size: 14pt;
-      }
-
-      #window,
-      #clock,
-      #memory,
-      #cpu,
-      #pulseaudio,
-      #network {
-        padding-left: 10px;
-        padding-right: 10px;
-      }
-      #memory {
-        color: rgb(181, 232, 224);
-      }
-      #cpu {
-        color: rgb(245, 194, 231);
-      }
-      #clock {
-        color: rgb(217, 224, 238);
-      }
       #pulseaudio {
-        color: rgb(245, 224, 220);
+        font-size: 14pt;
+        margin: 6px;
+        padding: 2px 8px;
+        color: #94f7c5;
       }
       #clock {
-        color: #eba0ac;
-      }
-      #network {
-        color: #abe9b3;
+        font-size: 14pt;
+        margin: 6px;
+        padding: 2px 8px;
+        background-color: #384148;
+        color: #70a5eb;
       }
 
-      #network.disconnected {
-        color: rgb(255, 255, 255);
-      }
       #tray {
         padding-right: 12px;
         padding-left: 8px;
+      }
+
+      #window {
+        color: #384148;
+        margin-left: 10px;
+        font-size: 12pt;
+        opacity: 0.6;
+        font-style: italic;
       }
     '';
     settings = [{
       "layer" = "top";
       "position" = "bottom";
       modules-left = [ "hyprland/workspaces" "hyprland/window" ];
-      modules-right = [ "pulseaudio" "memory" "cpu" "network" "clock" "tray" ];
+      modules-right = [ "pulseaudio" "clock" "tray" ];
       "hyprland/workspaces" = {
         "format" = "{name}";
         "on-click" = "activate";
       };
-
       "hyprland/window" = {
         "max-length" = 200;
         "separate-outputs" = true;
       };
       "pulseaudio" = {
-        "scroll-step" = 1;
-        "format" = "{icon} {volume}%";
-        "format-muted" = "󰖁 Muted";
-        "format-icons" = { "default" = [ "" "" "" ]; };
+        "scroll-step" = 10;
+        "format" = "󰕿{icon}";
+
+        "format-icons" = { "default" = [ "" "" "" "" "" ]; };
+        "format-muted" = "󰝟 ";
+
         "on-click" = "pamixer -t";
         "tooltip" = false;
       };
       "clock" = {
         "interval" = 1;
-        "format" = " {:%I:%M %p}";
+        "format" = "{:%I:%M %b %d}";
         "tooltip" = true;
         "tooltip-format" = ''
           {=%A; %d %B %Y}
           <tt>{calendar}</tt>'';
-      };
-      "memory" = {
-        "interval" = 1;
-        "format" = "󰍛 {percentage}%";
-        "states" = { "warning" = 85; };
-      };
-      "cpu" = {
-        "interval" = 1;
-        "format" = "󰻠 {usage}%";
-      };
-      "network" = {
-        "format-disconnected" = "󰯡 Disconnected";
-        "format-ethernet" = "󰀂 {ifname}";
-        "interval" = 1;
-        "tooltip" = false;
       };
       "tray" = {
         "icon-size" = 15;

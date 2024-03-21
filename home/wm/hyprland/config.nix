@@ -57,7 +57,7 @@ in {
         gaps_in = 5
         gaps_out = 10
         border_size = 2
-        col.active_border = rgb(89B4FA)
+        col.active_border = rgb(8cc1ff)
         col.inactive_border = rgb(2e3440)
         layout = dwindle # master|dwindle 
       }
@@ -212,14 +212,12 @@ in {
       bind=$mainMod,slash,workspace,previous
 
       bind=$mainMod,z,exec, pkill rofi || rofi -show drun -show-icons -theme ~/.config/rofi/launcher 
-      bind=$mainMod,C,exec, rofi -show calc -theme ~/.config/rofi/launcher.rasi
       bind=$mainMod,X,exec, rofi -show p -modi p:~/.config/rofi/off.sh -theme ~/.config/rofi/launcher.rasi
-      bind=$mainMod,E,exec, rofi -modi emoji -show emoji -theme ~/.config/rofi/launcher.rasi
       bind=$mainMod,V,exec, cliphist list | rofi -dmenu -theme ~/.config/rofi/launcher.rasi | cliphist decode | wl-copy
 
       # volume control
-      bind=,XF86AudioRaiseVolume,exec, pamixer -i 5
-      bind=,XF86AudioLowerVolume,exec, pamixer -d 5
+      bind=,XF86AudioRaiseVolume,exec, pamixer -i 10
+      bind=,XF86AudioLowerVolume,exec, pamixer -d 10
       bind=,XF86AudioMute,exec, pamixer -t
 
       # music control bindings

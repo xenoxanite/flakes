@@ -6,6 +6,9 @@
   };
 
   home.packages = with pkgs; [
+    wayland
+    wf-recorder
+    qt6.qtwayland
     swww
     wf-recorder
     waypaper

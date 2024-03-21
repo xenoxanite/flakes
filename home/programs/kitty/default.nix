@@ -11,6 +11,7 @@
         italic_font = "auto";
         bold_italic_font = "auto";
         mouse_hide_wait = 1;
+        window_padding_width = 6;
         cursor_shape = "underline";
         url_color = "#0087bd";
         url_style = "dotted";
@@ -18,75 +19,48 @@
         background_opacity = "0.98";
       };
       extraConfig = ''
-        # The basic colors
-        foreground              #CDD6F4
-        background              #1E1E2E
-        selection_foreground    #1E1E2E
-        selection_background    #F5E0DC
+        foreground #b6beca
+        background #101419
 
-        # Cursor colors
-        cursor                  #F5E0DC
-        cursor_text_color       #1E1E2E
+        # Black
+        color0 #1c252c
+        color8 #384148
 
-        # URL underline color when hovering with mouse
-        url_color               #F5E0DC
+        # Red
+        color1 #e05f65
+        color9 #fc7b81
 
-        # Kitty window border colors
-        active_border_color     #B4BEFE
-        inactive_border_color   #6C7086
-        bell_border_color       #F9E2AF
+        # Green
+        color2  #78dba9
+        color10 #94f7c5
 
-        # OS Window titlebar colors
-        wayland_titlebar_color  #1E1E2E
+        # Yellow
+        color3  #f1cf8a
+        color11 #ffeba6
 
-        # Tab bar colors
-        active_tab_foreground   #11111B
-        active_tab_background   #CBA6F7
-        inactive_tab_foreground #CDD6F4
-        inactive_tab_background #181825
-        tab_bar_background      #11111B
+        # Blue
+        color4  #70a5eb
+        color12 #8cc1ff
 
-        # Colors for marks (marked text in the terminal)
-        mark1_foreground #1E1E2E
-        mark1_background #B4BEFE
-        mark2_foreground #1E1E2E
-        mark2_background #CBA6F7
-        mark3_foreground #1E1E2E
-        mark3_background #74C7EC
+        # Magenta
+        color5  #c68aee
+        color13 #e2a6ff
 
-        # The 16 terminal colors
+        # Cyan
+        color6  #74bee9
+        color14 #90daff
 
-        # black
-        color0 #45475A
-        color8 #585B70
+        # White
+        color7  #dee1e6
+        color15 #fafdff
 
-        # red
-        color1 #F38BA8
-        color9 #F38BA8
+        # Cursor
+        cursor #f5f5f5
+        cursor_text_color #a9b1d6
 
-        # green
-        color2  #A6E3A1
-        color10 #A6E3A1
-
-        # yellow
-        color3  #F9E2AF
-        color11 #F9E2AF
-
-        # blue
-        color4  #89B4FA
-        color12 #89B4FA
-
-        # magenta
-        color5  #F5C2E7
-        color13 #F5C2E7
-
-        # cyan
-        color6  #94E2D5
-        color14 #94E2D5
-
-        # white
-        color7  #BAC2DE
-        color15 #A6ADC8
+        # Selection highlight
+        selection_foreground #a9b1d6
+        selection_background #22262e
       '';
     };
   };
