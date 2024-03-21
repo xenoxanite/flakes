@@ -28,10 +28,6 @@
       url = "github:yokoffing/BetterFox";
       flake = false;
     };
-    hardened-firefox = {
-      url = "github:arkenfox/user.js";
-      flake = false;
-    };
     hyprland = {
       url = "github:hyprwm/Hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -44,10 +40,6 @@
     let
       selfPkgs = import ./pkgs;
       system = "x86_64-linux";
-      pkgs = import nixpkgs {
-        inherit system;
-        config = { allowUnfree = true; };
-      };
       pkgs-master = import inputs.nixpkgs-master {
         inherit system;
         config = { allowUnfree = true; };

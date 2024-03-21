@@ -3,9 +3,15 @@
     enable = true;
     package = pkgs-master.waybar;
     style = ''
+      #window {
+        font-size: 10pt;
+        opacity: 0.9;
+        color: #414868;
+        font-style: italic;
+        padding-left: 12px;
+      }
       * {
         font-family: "JetBrainsMono Nerd Font";
-        font-size: 18px;
         font-weight: bold;
         border-radius: 0px;
         transition-property: background-color;
@@ -65,6 +71,17 @@
         padding-right: 6px;
         color: rgb(201, 203, 255);
       }
+
+
+      #workspaces,
+      #clock,
+      #memory,
+      #cpu,
+      #pulseaudio,
+      #network {
+        font-size: 14pt;
+      }
+
       #window,
       #clock,
       #memory,
@@ -81,13 +98,13 @@
         color: rgb(245, 194, 231);
       }
       #clock {
-        color: #eba0ac;
+        color: rgb(217, 224, 238);
       }
       #pulseaudio {
         color: rgb(245, 224, 220);
       }
       #clock {
-          color: rgb(242, 143, 173);
+        color: #eba0ac;
       }
       #network {
         color: #abe9b3;
@@ -99,13 +116,6 @@
       #tray {
         padding-right: 12px;
         padding-left: 8px;
-      }
-      #window {
-        opacity: 0.9;
-        color: #414868;
-        font-style: italic;
-        padding-left: 14px;
-        font-size: 10pt;
       }
     '';
     settings = [{

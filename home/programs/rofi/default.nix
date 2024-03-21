@@ -2,7 +2,6 @@
   programs.rofi = {
     enable = true;
     package = pkgs.rofi-wayland;
-    plugins = [ pkgs.rofi-emoji pkgs.rofi-calc ];
   };
   home.file = {
     ".config/rofi/off.sh".source = ./off.sh;

@@ -130,22 +130,6 @@
         "type": "github"
       }
     },
-    "hardened-firefox": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1707077370,
-        "narHash": "sha256-624Giuo1TfeXQGzcGK9ETW86esNFhFZ5a46DCjT6K5I=",
-        "owner": "arkenfox",
-        "repo": "user.js",
-        "rev": "33a84b608c8a1f871c6ce9c4d2b932dc57078fae",
-        "type": "github"
-      },
-      "original": {
-        "owner": "arkenfox",
-        "repo": "user.js",
-        "type": "github"
-      }
-    },
     "hercules-ci-effects": {
       "inputs": {
         "flake-parts": "flake-parts_2",
@@ -397,8 +381,8 @@
     "nixpkgs": {
       "locked": {
         "lastModified": 0,
-        "narHash": "sha256-g0bDwXFmTE7uGDOs9HcJsfLFhH7fOsASbAuOzDC+fhQ=",
-        "path": "/nix/store/k5l01g2zwhysjyl5zjvg5zxnj0lyxpp1-source",
+        "narHash": "sha256-qrxvLS888pNJFwJdK+hf1wpRCSQcqA6W5+Ox202NDa0=",
+        "path": "/nix/store/zaza7mgggz4m5h6z18kajabf4wciaj47-source",
         "type": "path"
       },
       "original": {
@@ -408,11 +392,11 @@
     },
     "nixpkgs-master": {
       "locked": {
-        "lastModified": 1710916621,
-        "narHash": "sha256-dYR8SuCLVM8p7qyZi0XWbuAM5xn8INrV3ZuQ78xWkZo=",
+        "lastModified": 1710938121,
+        "narHash": "sha256-AJBv/MEktbJ+sHf1G6rdPmde3IapsG/2/5TLsk6KfZk=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "17863bb74afcbfdceb18e4951f88912dce6c4530",
+        "rev": "66e2e75c671f9a674a28d340e59a0157efb6f905",
         "type": "github"
       },
       "original": {
@@ -440,11 +424,11 @@
     },
     "nur": {
       "locked": {
-        "lastModified": 1710912007,
-        "narHash": "sha256-AC5nz3ZN3jpxqWWGv18SVGNXOQ/Q0mzrema05WUaqXI=",
+        "lastModified": 1710938324,
+        "narHash": "sha256-EcTbILvmmqrQ31PeTKtUQMhrZ7Wn9z/ldI22ZZmMAyI=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "b872338eababdfe454d62c3cfda27b4796e6875c",
+        "rev": "c6ebb89c8d8cfc4fb994347c3fb5dd7719f4e2e9",
         "type": "github"
       },
       "original": {
@@ -457,7 +441,6 @@
       "inputs": {
         "BetterFox": "BetterFox",
         "disko": "disko",
-        "hardened-firefox": "hardened-firefox",
         "home-manager": "home-manager",
         "hosts": "hosts",
         "hyprland": "hyprland",

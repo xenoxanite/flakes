@@ -15,7 +15,7 @@
         url_color = "#0087bd";
         url_style = "dotted";
         confirm_os_window_close = 0;
-        background_opacity = "0.97";
+        background_opacity = "0.98";
       };
       extraConfig = ''
         # The basic colors
@@ -53,6 +53,8 @@
         mark2_background #CBA6F7
         mark3_foreground #1E1E2E
         mark3_background #74C7EC
+
+        # The 16 terminal colors
 
         # black
         color0 #45475A

@@ -1,4 +1,4 @@
-{ pkgs,pkgs-master,  ... }:
+{ pkgs, pkgs-master, ... }:
 let
   myswaylock = pkgs.writeShellScriptBin "myswaylock" ''
     ${pkgs.swaylock-effects}/bin/swaylock  \
@@ -56,14 +56,14 @@ in {
       general {
         gaps_in = 5
         gaps_out = 10
-        border_size = 0
+        border_size = 2
         col.active_border = rgb(89B4FA)
         col.inactive_border = rgb(2e3440)
         layout = dwindle # master|dwindle 
       }
 
       dwindle {
-        no_gaps_when_only = true 
+        no_gaps_when_only = false 
         force_split = 0 
         special_scale_factor = 0.8
         split_width_multiplier = 1.0 
@@ -88,21 +88,22 @@ in {
         drop_shadow = false
         dim_inactive = false
           blur {
-              enabled = true
+              enabled = false
               size = 3
               passes = 3
               new_optimizations = true
               ignore_opacity = false
           }
       }
+
       animations {
-        enabled=0
-        bezier = overshot, 0.13, 0.99, 0.29, 1.1
-        animation = windows, 1, 4, overshot, slide
-        animation = windowsOut, 1, 4, default, popin 50%
-        animation = border, 1, 5, default
-        animation = fade, 1, 8, default
-        animation = workspaces, 1, 6, overshot, slidevert
+          enabled=0
+          bezier = overshot, 0.13, 0.99, 0.29, 1.1
+          animation = windows, 1, 4, overshot, slide
+          animation = windowsOut, 1, 5, default, popin 80%
+          animation = border, 1, 5, default
+          animation = fade, 1, 8, default
+          animation = workspaces, 1, 6, overshot, slidevert
       }
 
       misc {
@@ -130,7 +131,7 @@ in {
       #------------#
       # change gap #
       #------------#
-      bind = $mainMod SHIFT, G,exec,hyprctl --batch "keyword general:gaps_out 10;keyword general:gaps_in 5;keyword general:border_size 0"
+      bind = $mainMod SHIFT, G,exec,hyprctl --batch "keyword general:gaps_out 10;keyword general:gaps_in 5;keyword general:border_size 2"
       bind = $mainMod , G,exec,hyprctl --batch "keyword general:gaps_out 0;keyword general:gaps_in 0;keyword general:border_size 0"
 
       #--------------------------------------#
