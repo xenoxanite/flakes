@@ -44,6 +44,10 @@ in {
   };
   wayland.windowManager.hyprland = {
     extraConfig = ''
+      exec-once = /nix/store/8xanhmwi20ikas8mf0map1kjza0g78i0-dbus-1.14.10/bin/dbus-update-activation-environment --systemd DISPLAY HYPRLAND_INSTANCE_SIGNATURE WAYLAND_DISPLAY XDG_CURRENT_DESKTOP && systemctl --user stop hyprland-session.target && systemctl --user start hyprland-session.target
+
+      $animationDuration = 6
+      $animationStart=20%
       $mainMod = SUPER 
       monitor=,preferred,auto,1 
 
@@ -88,26 +92,43 @@ in {
         drop_shadow = false
         dim_inactive = false
           blur {
-              enabled = false
+              enabled = true 
               size = 3
-              passes = 3
+              passes = 1
               new_optimizations = true
               ignore_opacity = false
           }
       }
 
+      # animations {
+      #     enabled = 1
+      #     bezier = overshot, 0.13, 0.99, 0.29, 1.1
+      #     animation = windows, 1, 3, overshot, slide
+      #     animation = windowsOut, 1, 4, default, popin 80%
+      #     animation = border, 1, 4, default
+      #     animation = fade, 1, 6, default
+      #     animation = workspaces, 1, 4, overshot, slidevert
+      # }
+
+
+      $animationCurve = easeInOutQuint
+
       animations {
-          enabled=0
-          bezier = overshot, 0.13, 0.99, 0.29, 1.1
-          animation = windows, 1, 4, overshot, slide
-          animation = windowsOut, 1, 5, default, popin 80%
-          animation = border, 1, 5, default
-          animation = fade, 1, 8, default
-          animation = workspaces, 1, 6, overshot, slidevert
+          enabled = true
+          bezier = easeInOutBack, 0.68, -0.55, 0.265, 1.55
+          bezier = easeInOutBack2, 0.65,-0.31,0.35,1.31
+          bezier = easeInOutQuint, 0.83, 0, 0.17, 1
+          bezier = easeInOutQuart, 0.76, 0, 0.24, 1
+          bezier = linear,0,0,1,1
+          bezier = easeIn,0.42, 0, 1, 1
+          bezier = myBezier,0.25,0.5,-0.1,1.1
+          animation = fade, 1, $animationDuration, default
+          animation = border, 1, $animationDuration, default
+          animation = windows, 1, $animationDuration, $animationCurve, slide #popin $animationStart
+          animation = workspaces, 1, $animationDuration, $animationCurve 
       }
 
       misc {
-        disable_autoreload = true
         disable_hyprland_logo = true
         always_follow_on_dnd = true
         layers_hog_keyboard_focus = true
@@ -292,7 +313,6 @@ in {
       windowrule=move 25%-,nemo
       windowrule=size 960 540,nemo
       windowrule=opacity 0.95,title:Telegram
-      windowrule=animation slide right,kitty
       windowrule=workspace 4, discord
       windowrule=workspace name:Music, musicfox
       windowrule=float,ncmpcpp

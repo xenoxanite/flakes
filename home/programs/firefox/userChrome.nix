@@ -78,19 +78,19 @@
 
       /* Theme Colour Suggestions
          *                              Dark        Light   */
-      --window-colour: #1E1E2E; /* #FAFAFC; */
+      --window-colour: #101419; /* #FAFAFC; */
 
-      --secondary-colour: #45475A; /* #EAEAEC; */
-      --inverted-colour: #585B70; /* #1E2021; */
-      --blue: #89B4FA;
+      --secondary-colour: #1c252c; /* #EAEAEC; */
+      --inverted-colour: #384148; /* #1E2021; */
+      --blue: #8cc1ff;  
 
       /* Containter Tab Colours */
-      --uc-identity-color-blue: #89B4FA;
-      --uc-identity-color-teal: #94E2D5;
-      --uc-identity-color-green: #A6E3A1;
-      --uc-identity-color-yellow: #F9E2AF;
-      --uc-identity-color-orange: #fab387;
-      --uc-identity-color-red: #f38ba8;
+      --uc-identity-color-blue: #8cc1ff;
+      --uc-identity-color-teal: #90daff;
+      --uc-identity-color-green: #94f7c5;
+      --uc-identity-color-yellow: #ffeba6;
+      --uc-identity-color-orange: #e2a6ff;
+      --uc-identity-color-red: #fc7b81;
       --uc-identity-color-pink: #f5c2e7;
       --uc-identity-color-purple: #F5C2E7;
 

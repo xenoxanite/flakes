@@ -11,7 +11,7 @@
         italic_font = "auto";
         bold_italic_font = "auto";
         mouse_hide_wait = 1;
-        window_padding_width = 6;
+        window_padding_width = 3;
         cursor_shape = "underline";
         url_color = "#0087bd";
         url_style = "dotted";
