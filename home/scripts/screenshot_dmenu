@@ -1,0 +1,26 @@
+#!/bin/sh
+
+SCSH_FORMAT="$(date +%Y-%m-%d_%T).png"
+SCSH_DIR="$HOME/pix/screenshots/"
+
+mkdir -p $SCSH_DIR
+
+AREA_OPTS=" save\n copy"
+CAP_OPTS=" screen\n󱂬 window\n󰋃 selection"
+
+SCHSH_AREA=$(echo -e $AREA_OPTS | rofi -dmenu -theme ~/.config/rofi/launcher.rasi )
+[[ -z $SCHSH_AREA ]] && echo "screenshot aborted" && exit 0
+
+SCHSH_CAP=$(echo -e $CAP_OPTS | rofi -dmenu -theme ~/.config/rofi/launcher.rasi )
+[[ -z $SCHSH_CAP ]] && echo "screenshot aborted" && exit 0
+
+
+if [[ $SCHSH_AREA == " save" ]]; then
+  [[ $SCHSH_CAP == " screen" ]] && maim $SCSH_DIR/$SCSH_FORMAT && notify-send "screenshot" "saved to $SCSH_DIR"
+  [[ $SCHSH_CAP == "󱂬 window" ]] && maim -i $(xdotool getactivewindow) $SCSH_DIR/$SCSH_FORMAT && notify-send "window" "saved to $SCSH_DIR"
+  [[ $SCHSH_CAP == "󰋃 selection" ]] && maim -s $SCSH_DIR/$SCSH_FORMAT && notify-send "selection" "saved to $SCSH_DIR"
+elif [[ $SCHSH_AREA == " copy" ]]; then
+  [[ $SCHSH_CAP == " screen" ]] && maim | xclip -selection clipboard -t image/png && notify-send "screen" "copied to clipboard"
+  [[ $SCHSH_CAP == "󱂬 window" ]] && maim -i $(xdotool getactivewindow) | xclip -selection clipboard -t image/png && notify-send "window" "copied to clipboard"
+  [[ $SCHSH_CAP == "󰋃 selection" ]] && maim -s | xclip -selection clipboard -t image/png && notify-send "selection" "copied to clipboard"
+fi

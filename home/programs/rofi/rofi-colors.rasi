@@ -1,0 +1,7 @@
+* {{  
+  al: #00000000;
+  ac: {color8};
+  se: {color1};
+  bg: {color0};
+  fg: {foreground};
+}}
