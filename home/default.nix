@@ -3,7 +3,7 @@
   home-manager = {
     useUserPackages = true;
     useGlobalPkgs = true;
-    extraSpecialArgs = { inherit inputs user; };
+    extraSpecialArgs = { inherit inputs user self; };
     users.${user} = {
       imports = [ ./programs ./editor/neovim ./scripts ];
       home = {

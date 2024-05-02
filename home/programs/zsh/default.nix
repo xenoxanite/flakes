@@ -21,7 +21,9 @@
         "nix-collect-garbage -d && sudo nix-collect-garbage -d && sudo rm /nix/var/nix/gcroots/auto/*";
       v = ''nvim "$(fd --type f --hidden --exclude .git | fzf --reverse)"'';
       mus = ''
-        mpv "$(fd ~/musix | find -name "*.mp3" -o  -name "*.webp" |fzf --reverse)"'';
+        mpv "$(fd /nix/persist/home/xenoxanite/musix | find -name "*.mp3" -o  -name "*.webp" |fzf --reverse)"'';
+      aud =
+        ''mpv "$(fd | find -name "*.mp3" -o  -name "*.webp" |fzf --reverse)"'';
       vid = ''
         mpv "$(fd | find -name "*.mkv" -o -name "*.mp4" -o -name "*.webm" |fzf --reverse)"'';
       record =
@@ -34,6 +36,7 @@
       dl = "$HOME/downloads";
       vids = "$HOME/vids";
       pix = "$HOME/pix";
+      musix = "$HOME/musix";
       media = "/run/media/$USER";
     };
   };

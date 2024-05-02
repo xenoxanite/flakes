@@ -6,5 +6,6 @@
     ./impermanence.nix
     ./fonts.nix
     ./networking.nix
+    ./gaming.nix
   ];
 }

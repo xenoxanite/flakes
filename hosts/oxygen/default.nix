@@ -11,7 +11,7 @@
     inputs.disko.nixosModules.default
     ./../../system
     ./../../home
-    (import ./../../lib/disko.nix )
+    (import ./../../lib/disko.nix)
   ];
   boot = {
     loader = {
@@ -44,12 +44,7 @@
     enable = true;
     cpuFreqGovernor = "performancee";
   };
-  services = {
-    udev.extraRules = ''
-      KERNEL=="card0", SUBSYSTEM=="drm", DRIVERS=="amdgpu", ATTR{device/power_dpm_force_performance_level}="high"
-    '';
-    gvfs.enable = true;
-  };
+  services = { gvfs.enable = true; };
 
   system.stateVersion = "23.11";
 }

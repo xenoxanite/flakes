@@ -22,6 +22,7 @@
         "musix"
         "virt"
         "Downloads"
+        "Games"
         {
           directory = ".gnupg";
           mode = "0700";
@@ -36,6 +37,7 @@
         ".suckless"
         ".cache"
         ".local"
+        ".steam"
         ".rustup"
         ".cargo"
       ];
